@@ -20,7 +20,7 @@ const carSchema = new mongoose.Schema({
         maxLength:50
     },
     price:{
-        type: Number,
+        type: String,
         required: true,
     },
     image:{

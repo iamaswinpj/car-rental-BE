@@ -2,7 +2,7 @@ const adminToken = require("../utils/generateToken");
 const Seller = require("../models/sellerModel");
 const bcrypt = require("bcrypt");
 
-const register = async()=>{
+const register = async(req,res)=>{
     console.log("hitted");
     try {
     const{sellerName,email,password} = req.body; 
@@ -38,7 +38,7 @@ const register = async()=>{
 }
 //signin
 
-const login = async()=>{
+const login = async(req,res)=>{
 
     try {
     const {email,password}= req.body;

@@ -2,7 +2,7 @@ const generateToken = require("../utils/generateToken");
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 
-const register = async()=>{
+const register = async(req,res)=>{
 
     console.log("hitted");
     try {
@@ -49,7 +49,7 @@ const token = generateToken(email);
 
 //signin user code here
 
-const login = async()=>{
+const login = async(req,res)=>{
 
 try {
 
