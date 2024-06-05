@@ -9,6 +9,7 @@ const carSchema = new mongoose.Schema({
     },
     category:{
       type: String,
+      enum: ["Normal car","Wedding car" ,"Offroad" ],
       maxLength: 20,
       required: true,
     },
