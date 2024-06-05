@@ -25,7 +25,8 @@ const carSchema = new mongoose.Schema({
     },
     image:{
         type: String,
-    }
+    },
+   seller: [{ type: mongoose.Types.ObjectId , ref: "Seller" }],
 },
     {timestamps: true},
 );

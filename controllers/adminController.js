@@ -1,30 +1,23 @@
-const adminToken = require("../utils/generateToken");
-const Seller = require("../models/sellerModel");
+const { adminToken } = require("../utils/generateToken");
+const Admin = require("../models/adminModel");
 const bcrypt = require("bcrypt");
 
 const register = async (req, res) => {
   console.log("hitted");
   try {
-    const { sellerName, email, password } = req.body;
-    console.log(email);
+    const { username, password } = req.body;
+    console.log(username);
 
-    const sellerExist = await Seller.findOne({ email });
-
-    if (sellerExist) {
-      return res.send("Seller is already registered");
-    }
     const saltRounds = 10;
     const hashPassword = await bcrypt.hash(password, saltRounds);
 
-    const newSeller = new Seller({
-      sellerName,
-      email,
+    const newAdmin = new Admin({
+      username,
       hashPassword,
     });
-    const newSellerCreated = newSeller.save();
-
-    if (!newSellerCreated) {
-      return res.send("Seller not created");
+    const newAdminCreated = newAdmin.Save();
+    if (!newAdminCreated) {
+      return res.send("Admin not created");
     }
     //token
     const token = adminToken(email);
@@ -36,31 +29,29 @@ const register = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
-//signin
 
 const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    console.log(email);
-
-    const seller = await Seller.findOne({ email });
-
-    if (!seller) {
-      return res.send("Seller not found");
+    const { username, password } = req.body;
+    console.log(username);
+    const admin = await Admin.findOne({ username });
+    if (!admin) {
+      return res.send("admin not found");
     }
-
     const matchPassword = await bcrypt.compare(password, user.hashPassword);
     if (!matchPassword) {
-      return res.send("Password incorrect");
+      return res.send("password incorrect");
     }
+    //token
 
     const token = adminToken(email);
     res.cookie("token", token);
     res.send("Logged in!");
   } catch (error) {
+
     console.log(error, "Something wrong");
     res.status(500).send("Internal Server Error");
   }
 };
 
-module.exports = { register, login };
+module.exports = { register,login };

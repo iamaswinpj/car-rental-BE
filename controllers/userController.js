@@ -24,7 +24,8 @@ const register = async(req,res)=>{
     const hashPassword = await bcrypt.hash(password, saltRounds);
 
     const newUser = new User({
-        sellerName,
+        firstName,
+        lastName,
         email,
         hashPassword,})
 
@@ -68,7 +69,7 @@ try {
 
     if(!matchPassword){
 
-        return req.send("Paswword not found");
+        return req.send("Paswword Incorrect");
     }
 
 //token for signin

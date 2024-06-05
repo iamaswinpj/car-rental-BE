@@ -15,11 +15,16 @@ const sellerSchema = new mongoose.Schema({
         minLength: 5,
         maxLength: 30,
       },
+      role: {
+        type: String,
+        enum: ["seller", "admin"],
+      },
       hashPassword: {
         type: String,
         required: true,
         minLength: 5,
       },
+      car: [{ type: mongoose.Types.ObjectId, ref: "Car" }],
     },
     
     { timestamps : true },

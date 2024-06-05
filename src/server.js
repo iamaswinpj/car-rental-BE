@@ -1,10 +1,11 @@
 const express = require("express")
 const app = express();
-const cors = require("cors");
+// const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const connectDB = require("../config/db");
 const userRouter = require("../routes/userRouter");
 const sellerRouter = require("../routes/sellerRouter");
+const adminRouter = require("../routes/adminRouter");
 
 const port = 3000;
 connectDB();
@@ -14,6 +15,8 @@ app.use(cookieParser());
 
 app.use("/api/v1/user",userRouter);
 app.use("/api/v1/seller",sellerRouter);
+app.use("/api/v1/admin",adminRouter);
+
 
 
 

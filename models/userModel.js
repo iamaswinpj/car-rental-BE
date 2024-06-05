@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema({
       required: true,
       minLength: 5,
     },
+    car: [{ type: mongoose.Types.ObjectId, ref: "Car" }],
   },
   
   { timestamps : true },
