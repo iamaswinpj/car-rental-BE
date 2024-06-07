@@ -1,7 +1,7 @@
 const Car = require("../models/carModel");
 const Seller = require("../models/sellerModel");
 const { cloudinaryInstance } = require("../config/cloudinary");
-const { request } = require("express");
+
 
 //get all cars details
 const getCars = async (req, res) => {
@@ -40,12 +40,13 @@ const createCar = async (req, res) => {
           message: "Error uploading file to cloudinary",
         });
       }
-      const imageUrl = result.secure_url;
-      const body = req.body;
-      console.log(body, "body");
     });
 
-    const { carName, category, description, price, sellerEmail } = req.body;
+    const imageUrl = result.url;
+    const body = req.body;
+    // console.log(body, "body");
+
+    const { carName, category, description, price, sellerEmail } = body;
 
     console.log(sellerEmail);
 
@@ -81,11 +82,12 @@ const updateCar = async (req, res) => {
 
     const { carName, category, description, price } = req.body;
 
-    const updateCar = await Car.findOneAndUpdate(
-
-      { carName,description, price, category },
-      
-    );
+    const updateCar = await Car.findOneAndUpdate({
+      carName,
+      description,
+      price,
+      category,
+    });
 
     if (!updateCar) {
       return res.send("Updation Failed");

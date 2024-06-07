@@ -6,6 +6,4 @@ cloudinary.v2.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
- const cloudinaryInstance = cloudinary.v2;
-
  module.exports = cloudinaryInstance;
